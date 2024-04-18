@@ -3,24 +3,31 @@
 ### The agency I work for has indicated there is a need for automation/improvement in the efficiency of the filing system and storage database for facility forms and documents. Due to contracting with the state, there are forms that need completed and kept on file, monthly, quarterly, or annually. When these forms are submitted, a tickler is updated and sent to each facilty respectively. My goal for this app is make a friendly UI that is easy to follow for end users and efficient in storing files and providing timely reminders to facilities for upcoming or overdue docs. 
 
 1. What tech stack will you use for your final project? We recommend that you use React and Node for this project, however if you are extremely interested in becoming a Python developer you are welcome to use Python/Flask for this project.
+    
     - I will be using Node, Express, and React to build the site. React Strap will help with styling. 
 
 2. Is the front-end UI or the back-end going to be the focus of your project? Or are you going to make an evenly focused full-stack application?
+    
     - The app will need a decent back end to handle the types of requests. But the UI is equally as important as this is a B2B application. My goal is to have an even and well rounded app. 
 
 3. Will this be a website? A mobile app? Something else?
-    -This will begin as a website. If the agency I work for decides they want it, it might be refactored to plugin to the site they already have. 
+    
+    - This will begin as a website. If the agency I work for decides they want it, it might be refactored to plugin to the site they already have. 
 
 4. What goal will your project be designed to achieve?
+    
     - to assist a non-profit agency improving their workflow efficiency. 
 
 5. What kind of users will visit your app? In other words, what is the demographic of your users?
-    -Family Style mental health care providers who contract with the state to provide services to youth in care. 
+    
+    - Family Style mental health care providers who contract with the state to provide services to youth in care. 
 
 6. What data do you plan on using? How are you planning on collecting your data? You may have not picked your actual API yet, which is fine, just outline what kind of data you would like it to contain. You are welcome to create your own API and populate it with data. If you are using a Python/Flask stack are required to create your own API.
-    -I will be designing my own API that will handle requests from front end users and assist with organizing and storing data. There will not be any background data I need to pull from a 3rd party location. The data will be organic and provided from the users themselves. 
+    
+    - I will be designing my own API that will handle requests from front end users and assist with organizing and storing data. There will not be any background data I need to pull from a 3rd party location. The data will be organic and provided from the users themselves. 
 
 7. In brief, outline your approach to creating your project (knowing that you may not know everything in advance and that these details might change later). Answer questions like the ones below, but feel free to add more information:
+    
     a. What does your database schema look like?
         - There will be a table for each type of form that is used. 
         - There will be a table for Users. And a table of facilities. Users can be mapped to which facility they're allowed to edit (if they work with or in that specific facility.)

@@ -9,6 +9,7 @@
 
 1. Document storage system with automatic updating ticklers. 
     - I work for an agency that has to maintain facilities in certain repair and certain documentation. Our current system is to email our documents from our facilities to our main agency office and a person has to log those documents one by one and manually update a tickler. It's clunky and often falls behind. 
+    
     - I would build my own api that would work with a database to store any documentation entered by users (agency employees or contractors.). This would update the database to reflect current documentation. It would also update tickler. The tickler can be viewed on the site and will automitically email end user and/or supervisor at 30, 60, 90 days (as an example) to give individuals time to update or complete any coming due documentation. It would also store copies of the documents so they can be pulled for the appropriate file when necessary. 
 
 2. Family Recipe Blog Site
