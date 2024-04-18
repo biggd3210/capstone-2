@@ -28,7 +28,7 @@
 
 7. In brief, outline your approach to creating your project (knowing that you may not know everything in advance and that these details might change later). Answer questions like the ones below, but feel free to add more information:
     
-    a. What does your database schema look like?
+    - What does your database schema look like?
         
         - There will be a table for each type of form that is used. 
         
@@ -36,19 +36,19 @@
         
         - There will be a table of blank forms as well if the user needs to print a copy for some reason. 
     
-    b. What kinds of issues might you run into with your API? This is especially important if you are creating your own API, web scraping produces notoriously messy data.
+    - What kinds of issues might you run into with your API? This is especially important if you are creating your own API, web scraping produces notoriously messy data.
         
         - I suppose I need clarification on this as I shouldn't need to webscrape to gather data as it will be coming from the users themselves. That being said, I'm aiming to have quality validation tools in place to prevent poorly filled out forms from being submitted. 
     
-    c. Is there any sensitive information you need to secure?
+    - Is there any sensitive information you need to secure?
         
         - There should not be as the facility documents for the agency do not pertain to any of the persons served. It only pertains to facilities based issues, repairs, maintenance, inspections, etc. The agency has a database and secure server to handle HIPAA compliance and I will not be working with that. 
     
-    d. What functionality will your app include?
+    - What functionality will your app include?
         
         - Initially, the app will allow end users to upload forms and store them in the database. It will also automatically calculate the due dates for all forms as they are recurring. Eventually, a user will be able to fill out a form online without having to print and handwrite. (The forms need to meet special compliance with everything that is displayed. So any forms I write for the page will need to be approved prior to publication. so this is a later step.)
     
-    e. What will the user flow look like?
+    - What will the user flow look like?
         
         - When a user signs in, they will see a dashboard displaying the current tickler for their home facility. Admin will be able to see all deadlines for all facilities. 
         
@@ -58,7 +58,7 @@
         
         - The app will also send reminders to any user associated with a facility whose deadlines are approaching. (These will look different depending on what the forms are and when the facility needs them. Some forms are due regularly such as every month or every quarter. However there are forms like work orders for repairs that have different projected deadlines based on teh project.)
     
-    f. What features make your site more than a CRUD app? What are your stretch goals?
+    - What features make your site more than a CRUD app? What are your stretch goals?
         
         - I would eventually like to have all forms migrated digitally so a user could walk around on their tablet (agency provided) and fill out forms without having to waste the paper to print them. Once a user fills out a form, I would like to add a feature to the app where the digital form will fill out a document/pdf with the data so that it could be printed if necessary and placed in a paper file. (Some requirements from the state indicate a need to keep a digital and a paper file.)
         
