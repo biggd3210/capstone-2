@@ -14,8 +14,8 @@ import './NavBar.css';
 function NavBar() {
 
     return (
-        <div>
-            <Navbar expand="md">
+        <>
+            <Navbar className="navbar" expand="md">
                 <NavLink exact="true" to="/" className="navbar-brand">
                     <img
                         id="company-logo"
@@ -34,7 +34,7 @@ function NavBar() {
                     </NavItem>
                 </Nav>
             </Navbar>
-        </div>
+        </>
     )
 }
 
