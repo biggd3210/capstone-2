@@ -20,7 +20,7 @@ function NavBar() {
                     <img
                         id="company-logo"
                         alt="logo"
-                        src="../public/CTH-Logo.webp"
+                        src="../CTH-Logo.webp"
                     />
                     
                 </NavLink>

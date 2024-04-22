@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import './Home.css'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
+import cthLogo from '/CTH-Logo.webp'
 
 function Home() {
     const [count, setCount] = useState(0)
@@ -11,7 +12,7 @@ function Home() {
         <>
             <div>
                 <a href="https://vitejs.dev" target="_blank">
-                <img src={viteLogo} className="logo" alt="Vite logo" />
+                <img src={cthLogo} className="logo" alt="CTH logo" />
                 </a>
                 <a href="https://react.dev" target="_blank">
                 <img src={reactLogo} className="logo react" alt="React logo" />

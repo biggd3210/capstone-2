@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 //Component imports
 import Routes from './views/Routes';
-import Home from './components/Home';
 import NavBar from './components/NavBar';
 //CSS imports
 import './App.css';

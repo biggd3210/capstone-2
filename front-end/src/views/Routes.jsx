@@ -2,7 +2,7 @@ import React from "react";
 import { Routes as Switch, Route, Link } from 'react-router-dom';
 
 //component imports
-import Home from "../components/Home";
+import Home from "./Home";
 import LoginPage from "./LoginPage";
 
 function Routes () {
