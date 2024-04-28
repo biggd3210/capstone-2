@@ -63,5 +63,43 @@ class Factility {
             return facilitiesRes.rows;
     }
 
+    static async get(id) {
+        const facilityRes = await db.query(
+            `SELECT id,
+                    name,
+                    address,
+                    primary_owner AS "primaryOwner",
+                    phone
+            FROM facility
+            WHERE id ILIKE $1`,
+            [id],
+        );
 
+        const facility = facilityRes.rows[0];
+
+        if (!facility) throw new NotFoundError(`No matching facilities: ${id}`);
+
+        return facility;
+    }
+
+    static async updateFacility(id, data) {
+        const { setCols, values } = sqlPartialUpdate(data);
+
+        const idVarIdx = "$" + (values.length + 1);
+
+        const querySql = `UPDATE facilities
+                            SET ${setCols}
+                            WHERE id = ${idVarIdx}
+                            returning id,
+                                name,
+                                address,
+                                primary_owner AS "primaryOwner"
+                                phone`;
+        const result = await db.query(querySql, [...values, id]);
+        const facility = result.rows[0];
+
+        if (!facility) throw new NotFoundError(`No matching facility: ${id}`);
+
+        return facility;
+    }
 }
