@@ -1,16 +1,30 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "jsonschema": "^1.4.1"
+    "jsonschema": "^1.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.5"
   },
-  "name": "back-end",
+  "name": "facility-assist-back-end",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "config.js"
+    ]
+  },
+  "devDependencies": {
+    "supertest": "^5.0.0-0"
+  },
   "keywords": [],
-  "author": "",
+  "author": "D.S. Biggers",
   "license": "ISC",
   "description": ""
 }
