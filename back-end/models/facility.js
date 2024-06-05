@@ -10,8 +10,8 @@ const {
 
 /** Related functions for Facility */
 
-class Factility {
-    /** Create a company (from data), update db, return new company data
+class Facility {
+    /** Create a facility (from data), update db, return new facility data
      * 
      * data should be { id, name, address, primary_owner, phone }
      * 
@@ -103,3 +103,5 @@ class Factility {
         return facility;
     }
 }
+
+module.exports = Facility;
