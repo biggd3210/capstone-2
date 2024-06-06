@@ -1,0 +1,19 @@
+.LoginPage {
+    margin-top: 5rem;
+}
+
+.form-input {
+    justify-content: center;
+    margin: auto;
+}
+
+
+
+.Form-Group {
+    display: flex;
+    justify-content: center;
+}
+
+h3.login-banner {
+    margin-bottom: 30px;
+}

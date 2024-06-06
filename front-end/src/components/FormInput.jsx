@@ -10,10 +10,10 @@ import {
 function FormInput({ type, name }) {
 
     return (
-        <div>
-            <FormGroup row>
-                <Label  sm={2} htmlFor={name.toLowerCase()}>{name}:</Label>
-                <Col sm={6}>
+        <div className="Form-Group">
+            <FormGroup row className="form-input">
+                <Label htmlFor={name.toLowerCase()}>{name}:</Label>
+                <Col>
                 <Input  id={name.toLowerCase()} name={name.toLowerCase()} type={type} />
                 </Col>
             </FormGroup>
