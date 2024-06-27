@@ -3,7 +3,7 @@
 
 DROP DATABASE facility_assist;
 CREATE DATABASE facility_assist;
-\connect facilassist
+\connect facility_assist
 
 \i facility-assist-schema.sql
 \i facility-assist-seed.sql

@@ -13,17 +13,18 @@ CREATE TABLE facilities (
     facility_name TEXT NOT NULL,
     is_home BOOLEAN NOT NULL,
     address TEXT NOT NULL,
-    phone TEXT NO NULL
-)
+    phone TEXT NOT NULL,
+    primary_contact TEXT NOT NULL
+);
 
 CREATE TABLE documents (
     id VARCHAR(50) PRIMARY KEY,
     author TEXT NOT NULL,
     doc_type TEXT NOT NULL,
-    image_components BOOLEAN NOT NULL
+    image_components BOOLEAN NOT NULL,
     facility_id VARCHAR(25) NOT NULL
         REFERENCES facilities ON DELETE CASCADE
-)
+);
 
 CREATE TABLE user_facilities (
     username VARCHAR(25)
@@ -36,5 +37,6 @@ CREATE TABLE user_facilities (
 CREATE TABLE images (
     id VARCHAR(100) PRIMARY KEY,
     image_path VARCHAR NOT NULL,
-    document_id REFERENCES documents ON DELETE CASCADE
-)
+    document_id VARCHAR
+        REFERENCES documents ON DELETE CASCADE
+);

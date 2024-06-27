@@ -13,8 +13,8 @@ const PORT = +process.env.PORT || 3001;
 
 function getDatabaseUri() {
     return (process.env.NODE_ENV === "test")
-        ? "postgresql:///facilassist_test"
-        : process.env.DATABASE_URL || "postgresql:///facilassist";
+        ? "postgresql:///facility_assist_test"
+        : process.env.DATABASE_URL || "postgresql:///facility_assist";
 }
 
 const BCRYPT_WORK_FACTOR = process.env.NODE_ENV === "test" ? 1 : 12;

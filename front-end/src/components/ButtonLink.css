@@ -1,0 +1,13 @@
+.ButtonLink {
+    margin: 5px auto;
+}
+
+.ButtonLink a {
+    margin: auto;
+}
+
+.navlink-button {
+    width: 90%;
+    margin: auto;
+    background-color: blue;
+}

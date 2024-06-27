@@ -5,12 +5,12 @@
 const jsonschema = require("jsonschema");
 
 const express = require('express');
-const { ensureLoggedIn, ensureAdmin, ensureSameUserOrAdmin } = require("../middleware");
+const { ensureLoggedIn, ensureAdmin, ensureSameUserOrAdmin } = require("../middleware/auth.js");
 const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
 const { createToken } = require("../helpers/tokens");
-const userNewSchema = require("../schemas/userNew.json");
-const userUpdateSchema = require("../schemas/userUpdate.json");
+//const userNewSchema = require("../schemas/userNew.json");
+//const userUpdateSchema = require("../schemas/userUpdate.json");
 
 const router = express.Router();
 
@@ -64,16 +64,18 @@ router.get("/", ensureLoggedIn, ensureAdmin, async function (req, res, next) {
  * 
  * Authorization required: Admin
  */
-
-router.get("/:username", ensureLoggedIn, ensureAdmin, async function (req, res, next) {
+// ensureLoggedIn, ensureSameUserOrAdmin,
+router.get("/:username",  async function (req, res, next) {
     try {
         const user = await User.get(req.params.username);
-        const facilities = await User.getFacilities(req.params.username);
+        
+        // const facilities = await User.getFacilities(req.params.username);
 
-        /** if associated facilities, return user instance with array of facilities */
-        if (facilities.length > 0) {
-            user.facilities = facilities;
-        }
+        // /** if associated facilities, return user instance with array of facilities */
+        // if (facilities.length > 0) {
+        //     user.facilities = facilities;
+        // }
+        
 
         return res.json({ user });
     } catch (err) {

@@ -1,0 +1,25 @@
+.Dashboard {
+    width: 100%;
+}
+
+.welcome-banner {
+    text-align: left;
+}
+.container {
+    display: inline-flex;
+    width: 100%;
+}
+.nav-left-pane {
+    width: 250px;
+    border: 2px solid lightblue;
+    padding: 1.5rem;
+    margin: 10px 15px;
+    justify-content: center;
+}
+
+.facility-tickler {
+    border: 2px solid lightblue;
+    padding: 2rem;
+    margin: 10px 15px;
+    width: 50%;
+}

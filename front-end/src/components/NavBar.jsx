@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../auth/UserContext"; 
 import { NavLink } from 'react-router-dom';
 import { 
     Nav,
@@ -11,8 +12,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css';
 
 
-function NavBar() {
+function NavBar({ logout }) {
+    const { currentUser } = useContext(UserContext);
+    
+    const loggedInNav = (
+        <>
+            <NavItem>
+                <NavLink to='/tickler'>Tickler</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink to='/' onClick={logout}>Log out</NavLink>
+            </NavItem>
+        </>
+    )
+    
 
+    const loggedOutNav = (
+            <>
+            <NavItem>
+                <NavLink to='/login'>Login</NavLink>
+            </NavItem>
+            </>
+        )
+    
     return (
         <>
             <Navbar className="navbar" expand="md">
@@ -22,16 +44,13 @@ function NavBar() {
                         alt="logo"
                         src="../CTH-Logo.webp"
                     />
-                    
                 </NavLink>
-            
+                <h1>Facility Assist</h1>            
                 <Nav className="m1-auto" navbar>
                     <NavItem>
                         <NavLink to='/'>Home</NavLink>
                     </NavItem>
-                    <NavItem>
-                        <NavLink to='/login'>Login</NavLink>
-                    </NavItem>
+                {currentUser ? loggedInNav : loggedOutNav }
                 </Nav>
             </Navbar>
         </>
