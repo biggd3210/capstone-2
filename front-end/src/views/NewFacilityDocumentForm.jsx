@@ -1,6 +1,8 @@
 /** Imports from NPM Modules */
 import React, { useState, useContext } from "react";
 
+// API
+import FacilityAssistApi from "../api/api";
 
 /** Imports for styling components with reactstrap */
 import {Form,
@@ -25,7 +27,7 @@ function NewFacilityDocumentForm() {
         "dateTime" : "",
         "facility" : "",
         "docType" : "",
-        "period" : "",
+        "period" : "Please Choose Period",
         "year" : "",
         "attachments" : "",
         "fileName" : "",
@@ -52,6 +54,15 @@ function NewFacilityDocumentForm() {
         checkFile();
     }
 
+    async function handleSubmit (e) {
+        e.preventDefault();
+        const data = {
+            "key" : "morrisNeedsAttention.jpeg",
+        }
+        const res = await FacilityAssistApi.GetObjectFromBucket(data);
+        console.log('handleSubmit res is ', res);
+    }
+
     function removeParent(e) {
         e.preventDefault();
         setFileData(null);
@@ -59,7 +70,7 @@ function NewFacilityDocumentForm() {
 
     return (
         <div className="NewFacilityDocumentForm">
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label for="user">User</Label>
                     <Input 
@@ -88,9 +99,8 @@ function NewFacilityDocumentForm() {
                         type="select"
                         value={formData.period}
                         onChange={handleChange}
-                        defaultValue={"Please selected "}
                     >
-                        
+                        <option>Please Choose Appropriate Period</option>
                         <option>January</option>
                         <option>February</option>
                         <option>March</option>

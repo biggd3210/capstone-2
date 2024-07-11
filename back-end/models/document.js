@@ -16,7 +16,13 @@ class Document {
      * authorization: signed in, User must be authorized for facility. 
     */
 
-    static async create ({ username, facility_id, title, period, date_time, doc_type, bucketPath }) {
-        /** Should check for duplicates  */
-    }
+    // static async create ({ username, facility_id, title, period, date_time, doc_type, bucketPath }) {
+    //     /** Should check for duplicates  */
+    // }
+
+    /** Connects to Cloudflare to ensure PUT object to Facility Assist Bucket.*/
+
+    // static async putObjectToBucket(data) {
+
+    // }
 }

@@ -7,7 +7,6 @@ import FormInput from "../components/FormInput";
 
 function LoginPage({ login }) {
     const { currentUser } = useContext(UserContext);
-    console.log("currentUser is: ", currentUser);
     const navigateTo = useNavigate();
     const [formData, setFormData] = useState({
         username: "",
