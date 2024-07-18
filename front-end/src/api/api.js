@@ -8,7 +8,7 @@ import {
  } from '@aws-sdk/client-s3';
  import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 /** S3 values specific to Cloudflare */
 const accountid = 'fc487f406f29f4759ae71c9fe9419652';
