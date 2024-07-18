@@ -41,9 +41,9 @@ function LoginPage({ login }) {
         </div>
     )
 
-    // if (currentUser) {
-    //     navigateTo('/dashboard', { replace: true });
-    // }
+    if (currentUser) {
+        navigateTo('/dashboard', { replace: true });
+    }
     
     return (
         <>

@@ -30,8 +30,7 @@ function NewFacilityDocumentForm() {
         "period" : "Please Choose Period",
         "year" : "",
         "attachments" : "",
-        "fileName" : "",
-        "pathToBucket" : "",
+        "fileName" : ""
     });
 
     const [fileData, setFileData] = useState(null);
@@ -42,24 +41,20 @@ function NewFacilityDocumentForm() {
         console.log('formData is ', formData);
     }
 
-    function checkFile() {
-        console.log("fileData is ", fileData);
-        return;
-    }
     function handleFileChange (e) {
         const target = e.target;
         console.log("target type is ", target.files[0].type);
         console.log('target files is ', target.files);
-        setFileData(URL.createObjectURL(target.files[0]));
-        checkFile();
+        setFileData(target.files[0]);
+        setFormData(formData['fileName'] = target.files[0].name);
     }
 
     async function handleSubmit (e) {
         e.preventDefault();
         const data = {
-            "key" : "morrisNeedsAttention.jpeg",
+            'file' : fileData
         }
-        const res = await FacilityAssistApi.GetObjectFromBucket(data);
+        const res = await FacilityAssistApi.putToBucket(data);
         console.log('handleSubmit res is ', res);
     }
 
@@ -132,7 +127,7 @@ function NewFacilityDocumentForm() {
                 <Button type="submit">Submit New Document</Button>
                 {fileData !== null
                     ?   <div className="preview-container">
-                            <img className="image-preview" src={fileData} />
+                            <img className="image-preview" src={URL.createObjectURL(fileData)} />
                             <button id="remove" onClick={removeParent}>X</button>
                         </div>
                     : ''

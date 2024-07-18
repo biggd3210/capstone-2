@@ -35,7 +35,12 @@ const S3 = new S3Client({
  */
 
 class FacilityAssistApi {
-    // the token for interactive with the api will be stored here.
+    /** -------  All USER BASED METHODS --------- */
+    
+    /*
+     * the token for interactive with the api will be stored here.
+     * 
+     * */
     static token;
 
     static async request(endpoint, data = {}, method = "get") {
@@ -56,8 +61,6 @@ class FacilityAssistApi {
         }
     }
 
-    // Individual API routes
-
     /** Get the current user. */
 
     static async getCurrentUser(username) {
@@ -72,8 +75,6 @@ class FacilityAssistApi {
         return res.facilities;
     }
 
-
-
     /** Get token for login from username, password. */
 
     static async login(data) {
@@ -81,6 +82,34 @@ class FacilityAssistApi {
         return res.token;
     }
 
+    /** getSignedURL that can be used for GET, PUT, DELETE actions */
+
+    // static async getSignedUrl(key, operation) {
+    //     var options = {
+    //         Bucket: "facility-assist",
+    //         Key: key, /* Filename in bucket */
+    //         Expires: 60 * 10 /* URL should work for 10 minutes to compensate for large objects. */
+    //     }
+    // }
+
+    /** Get listobjects using signedUrl  */
+
+    static async ListObjectsInBucket(data) {
+        const url = await getSignedUrl(
+            S3,
+            new ListObjectsV2Command({
+                Bucket: 'facility-assist',
+                EncodingType: "url",
+
+            }),
+            { expiresIn: 60 * 10, } // 10 minutes
+        );
+
+        const response = await fetch(url);
+        const reader = response.body.getReader();
+        console.log("response is ", await reader.read());
+        return response;
+    }
     /** Get signedUrl for object to download from bucket */
 
     static async GetObjectFromBucket(data) {
@@ -92,7 +121,7 @@ class FacilityAssistApi {
                 Key: key
             }),
             {
-                expiresIn: 60 * 60 * 24 * 7, // 7d
+                expiresIn: 60 * 10, // 10minutes
             }
         );
 
@@ -108,19 +137,29 @@ class FacilityAssistApi {
     /** put object to bucket. Used by new document form.  */
 
     static async putToBucket(data) {
-        const key = data['key'];
+        const file = data['file'];
+        const key = file.name;
         const url = await getSignedUrl(
             S3,
             new PutObjectCommand({
                 Bucket: 'facility-assist',
-                key: key
+                Key: key
             }),
             {
-                expiresIn: 60 * 60 * 24 * 7, // 7 days
+                expiresIn: 60 * 10, // 10 minutes
             }
         );
+        console.log("url is ", url);
+        const options = {
+            params: { Key: file.name, ContentType: file.type },
+            headers: { 'Content-Type': file.type }
+        };
 
-        
+        axios.put(url, file)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+
+
     }
 }
 
