@@ -26,7 +26,8 @@ app.use('/users', userRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
-    return next(new NotFoundError());
+    //return next(new NotFoundError());
+    return "Hi"
 });
 
 /** Generic error handler; anything unhandled goes here. */
