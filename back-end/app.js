@@ -17,7 +17,7 @@ const userRoutes = require('./routes/users');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+// app.use(bodyParser.urlencoded());
 app.use(cors());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
@@ -26,8 +26,7 @@ app.use('/users', userRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
-    //return next(new NotFoundError());
-    return "Hi"
+    return next(new NotFoundError());
 });
 
 /** Generic error handler; anything unhandled goes here. */
