@@ -3,7 +3,7 @@
 /** Express app for capstone 2: FacilAssist */
 
 const express = require("express");
-const cors = require("cors");
+//const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const { NotFoundError } = require("./expressError");
