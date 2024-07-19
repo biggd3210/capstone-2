@@ -16,9 +16,10 @@ const userRoutes = require('./routes/users');
 
 const app = express();
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded());
 // app.use(cors());
+app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 // app.use('/facilities', facilitiesRoutes);
