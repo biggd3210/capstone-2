@@ -57,6 +57,7 @@ class FacilityAssistApi {
             return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
             console.error("API Error:", err.response);
+            console.log("requested url is , ", `${BASE_URL}/${endpoint}`);
             let message = err.response.data.error.message;
             throw Array.isArray(message) ? message : [message];
         }
