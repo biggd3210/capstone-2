@@ -3,7 +3,7 @@
 /** Express app for capstone 2: FacilAssist */
 
 const express = require("express");
-//const cors = require("cors");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const { NotFoundError } = require("./expressError");
@@ -18,7 +18,7 @@ const app = express();
 
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded());
-app.use(cors());
+// app.use(cors());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 // app.use('/facilities', facilitiesRoutes);
