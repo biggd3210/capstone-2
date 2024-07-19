@@ -59,7 +59,7 @@ class FacilityAssistApi {
             console.error("API Error:", err.response);
             console.log("requested url is , ", `${BASE_URL}/${endpoint}`);
             console.log('err stack is ', err.response);
-            console.log('err.stack is ', err.response.data);
+            console.log('err.stack is ', err);
             let message = err.response.data.error.message;
             throw Array.isArray(message) ? message : [message];
         }
