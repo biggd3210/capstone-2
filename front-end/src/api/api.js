@@ -45,7 +45,7 @@ class FacilityAssistApi {
 
     static async request(endpoint, data = {}, method = "get") {
         console.debug("API Call:", endpoint, data, method);
-
+        // .data.error.message
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${FacilityAssistApi.token}` };
         const params = ( method === "get" )
@@ -58,7 +58,7 @@ class FacilityAssistApi {
         } catch (err) {
             console.error("API Error:", err.response);
             console.log("requested url is , ", `${BASE_URL}/${endpoint}`);
-            let message = err.response.data.error.message;
+            let message = err.response;
             throw Array.isArray(message) ? message : [message];
         }
     }
