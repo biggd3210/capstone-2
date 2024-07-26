@@ -8,8 +8,8 @@ import {
  } from '@aws-sdk/client-s3';
  import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-const BASE_URL = import.meta.env.REACT_APP_BASE_URL || "https://facility-assist-backend.onrender.com";
-console.log("process.env.REACT_APP_BASE_URL is , ", import.meta.env.REACT_APP_BASE_URL);
+const BASE_URL = process.env.REACT_APP_BASE_URL || "https://facility-assist-backend.onrender.com";
+
 /** S3 values specific to Cloudflare */
 const accountid = 'fc487f406f29f4759ae71c9fe9419652';
 const tokenValue = '2kZ6HpFamhfbFDuZ0Uqcp2Y6NojFlvaPSqeU5q4A';
@@ -45,7 +45,8 @@ class FacilityAssistApi {
 
     static async request(endpoint, data = {}, method = "get") {
         console.debug("API Call:", endpoint, data, method);
-        // .data.error.message
+        console.log("env base_url is ", process.env.BASE_URL);
+        console.log("requested url is ", `${BASE_URL}/${endpoint}`);
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${FacilityAssistApi.token}` };
         const params = ( method === "get" )
