@@ -12,11 +12,23 @@ const { createToken } = require("../helpers/tokens");
 
 const router = express.Router();
 
+/** GET All Documents */
 router.get("/", ensureLoggedIn, ensureAdmin, async function (req, res, next) {
     try {
         const documents = await Document.findAll();
-        return res.json({ users });        
+        return res.json({ documents });        
     } catch (err) {
         return next(err);
     }
 });
+
+router.get('/:id', ensureLoggedIn, ensureAdmin, async function (req, res, next ) {
+    try {
+        const document = await Document.find(req.params.id);
+        return res.json({ document })
+    } catch (err) {
+        return next(err);
+    }
+});
+
+module.exports = router;

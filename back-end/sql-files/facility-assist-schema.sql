@@ -21,6 +21,10 @@ CREATE TABLE documents (
     id VARCHAR(50) PRIMARY KEY,
     author TEXT NOT NULL,
     doc_type TEXT NOT NULL,
+    doc_period TEXT NOT NULL,
+    doc_year TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    date_time TEXT NOT NULL,
     image_components BOOLEAN NOT NULL,
     facility_id VARCHAR(25) NOT NULL
         REFERENCES facilities ON DELETE CASCADE
@@ -39,4 +43,12 @@ CREATE TABLE images (
     image_path VARCHAR NOT NULL,
     document_id VARCHAR
         REFERENCES documents ON DELETE CASCADE
+);
+
+CREATE TABLE documents_images (
+    document_id VARCHAR(50)
+        REFERENCES documents ON DELETE CASCADE,
+    image_id VARCHAR(100)
+        REFERENCES images ON DELETE CASCADE,
+    PRIMARY KEY (document_id, image_id)
 );
