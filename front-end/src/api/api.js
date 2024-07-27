@@ -46,7 +46,7 @@ class FacilityAssistApi {
 
     static async request(endpoint, data = {}, method = "get") {
         console.debug("API Call:", endpoint, data, method);
-        console.log("env base_url is ", process.env.BASE_URL);
+        console.log("env base_url is ", import.meta.env.VITE_BASE_URL);
         console.log("requested url is ", `${BASE_URL}/${endpoint}`);
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${FacilityAssistApi.token}` };
