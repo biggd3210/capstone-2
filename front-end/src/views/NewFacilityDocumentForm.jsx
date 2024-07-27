@@ -23,13 +23,13 @@ import "./NewFacilityDocumentForm.css";
 function NewFacilityDocumentForm() {
     const { currentUser } = useContext(UserContext);
     const [ formData, setFormData ] = useState({
-        "user": currentUser.username,
+        "author": currentUser.username,
         "dateTime" : "",
         "facility" : "",
-        "docType" : "",
+        "docType" : "Fire Drill",
         "period" : "Please Choose Period",
-        "year" : "",
-        "attachments" : "",
+        "year" : "2024",
+        "attachments" : "No",
         "fileName" : ""
     });
 
@@ -89,6 +89,21 @@ function NewFacilityDocumentForm() {
                     />
                 </FormGroup>
                 <FormGroup>
+                    <Label for="docType">Document Type</Label>
+                    <Input
+                        id="docType"
+                        name="docType"
+                        type="select"
+                        value={formData.docType}
+                        onChange={handleChange}
+                    >
+                        <option>Please Select File Type</option>
+                        <option>Fire Drill</option>
+                        <option>On-Site Inspection</option>
+                        <option>Health and Safety</option>
+                    </Input>
+                </FormGroup>
+                <FormGroup>
                     <Label for="period">Period</Label>
                     <Input
                         id="period"
@@ -114,6 +129,34 @@ function NewFacilityDocumentForm() {
                         <option>Quarter 2</option>
                         <option>Quarter 3</option>
                         <option>Quarter 4</option>
+                    </Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="year">Year</Label>
+                    <Input
+                        id="year"
+                        name="year"
+                        type="select"
+                        value={formData.year}
+                        onChange={handleChange}
+                    >
+                        <option>2023</option>
+                        <option>2024</option>
+                        <option>2025</option>
+                        <option>2026</option>
+                    </Input>
+                </FormGroup>
+                <FormGroup>
+                    <Label for="attachments">Are there attachment images?</Label>
+                    <Input
+                        id="attachments"
+                        name="attachments"
+                        type="select"
+                        value={formData.attachments}
+                        onChange={handleChange}
+                    >
+                        <option>No</option>
+                        <option>Yes</option>
                     </Input>
                 </FormGroup>
                 <FormGroup>

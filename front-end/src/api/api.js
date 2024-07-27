@@ -164,6 +164,7 @@ class FacilityAssistApi {
 
         if (fileRes.success) {
             form.id = uuid();
+            form.dateTime = new Date().getTime();
             console.log('form data is ,', form);
             // const res = this.request('/documents', form, 'post');
             return res.status(201).json({ "success": 'OK' });
