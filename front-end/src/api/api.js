@@ -141,7 +141,7 @@ class FacilityAssistApi {
     static async putToBucket(data) {
         const { file, form } = data;
         const key = file.name;
-
+        console.log('formdata is ,', form);
         const url = await getSignedUrl(
             S3,
             new PutObjectCommand({
@@ -162,7 +162,7 @@ class FacilityAssistApi {
             .then(res => console.log(res))
             .catch(err => console.log(err));
 
-        if (fileRes.success) {
+        if (fileRes.statusText === "OK") {
             form.id = uuid();
             form.dateTime = new Date().getTime();
             console.log('form data is ,', form);
