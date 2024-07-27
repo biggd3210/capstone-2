@@ -1,4 +1,5 @@
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 import { 
     S3Client,
     ListBucketsCommand,
@@ -9,7 +10,7 @@ import {
  import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
  // https://facility-assist-backend.onrender.com
-const BASE_URL = import.meta.env.VITE_BASE_URL || "You didn't get the right variable.";
+const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3001";
 
 /** S3 values specific to Cloudflare */
 const accountid = 'fc487f406f29f4759ae71c9fe9419652';
@@ -46,8 +47,7 @@ class FacilityAssistApi {
 
     static async request(endpoint, data = {}, method = "get") {
         console.debug("API Call:", endpoint, data, method);
-        console.log("env base_url is ", import.meta.env.VITE_BASE_URL);
-        console.log("requested url is ", `${BASE_URL}/${endpoint}`);
+
         const url = `${BASE_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${FacilityAssistApi.token}` };
         const params = ( method === "get" )
@@ -58,9 +58,6 @@ class FacilityAssistApi {
             return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
             console.error("API Error:", err.response);
-            console.log("requested url is , ", `${BASE_URL}/${endpoint}`);
-            console.log('err stack is ', err.response);
-            console.log('err.stack is ', err);
             let message = err.response.data.error.message;
             throw Array.isArray(message) ? message : [message];
         }
@@ -142,8 +139,9 @@ class FacilityAssistApi {
     /** put object to bucket. Used by new document form.  */
 
     static async putToBucket(data) {
-        const file = data['file'];
+        const { file, form } = data;
         const key = file.name;
+
         const url = await getSignedUrl(
             S3,
             new PutObjectCommand({
@@ -160,9 +158,16 @@ class FacilityAssistApi {
             headers: { 'Content-Type': file.type }
         };
 
-        axios.put(url, file)
+        const fileRes = axios.put(url, file)
             .then(res => console.log(res))
             .catch(err => console.log(err));
+
+        if (fileRes.success) {
+            form.id = uuid();
+            console.log('form data is ,', form);
+            // const res = this.request('/documents', form, 'post');
+            return res.status(201).json({ "success": 'OK' });
+        }
 
 
     }

@@ -52,10 +52,12 @@ function NewFacilityDocumentForm() {
     async function handleSubmit (e) {
         e.preventDefault();
         const data = {
-            'file' : fileData
+            'file' : fileData,
+            'form' : formData
         }
         const res = await FacilityAssistApi.putToBucket(data);
-        console.log('handleSubmit res is ', res);
+
+
     }
 
     function removeParent(e) {
