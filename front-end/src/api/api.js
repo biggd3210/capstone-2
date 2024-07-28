@@ -158,7 +158,7 @@ class FacilityAssistApi {
             headers: { 'Content-Type': file.type }
         };
 
-        const fileRes = axios.put(url, file)
+        const fileRes = await axios.put(url, file)
             .then(res => console.log("res from axios put is ,", res))
             // .then(async function(form) {
             //     form.id = uuidv4();
