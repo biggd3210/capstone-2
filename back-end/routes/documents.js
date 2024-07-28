@@ -33,11 +33,11 @@ router.get('/:id', ensureLoggedIn, ensureAdmin, async function (req, res, next )
 
 router.post('/', async function (req, res, next) {
     try {
-        const validator = jsonschema.validate(req.body, documentNewSchema);
-        if (!validator.valid) {
-            const errs = validator.errors.map(e => e.stack);
-            throw new BadRequestError(errs);
-        }
+        // const validator = jsonschema.validate(req.body, documentNewSchema);
+        // if (!validator.valid) {
+        //     const errs = validator.errors.map(e => e.stack);
+        //     throw new BadRequestError(errs);
+        // }
         const document = await Document.create(req.body);
         return res.status(201).json({ document });
     } catch (err) {
