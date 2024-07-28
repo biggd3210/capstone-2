@@ -16,7 +16,7 @@ class Document {
      * authorization: signed in, User must be authorized for facility. 
     */
 
-    static async create({ id, author, docType, imageComponents, facilityId, docPeriod, docYear, fileName, dateTime }) {
+    static async create({ id, author, docType, attachments, facility, period, year, fileName, dateTime }) {
         const duplicateCheck = await db.query(
             `SELECT id
             FROM documents
