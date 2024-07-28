@@ -47,7 +47,7 @@ function NewFacilityDocumentForm() {
         console.log('target files is ', target.files);
         setFileData(target.files[0]);
         const newFormData = {... formData};
-        newFormData['fileName'] = target.files[0].name;
+        newFormData['fileName'] = `${target.files[0].name}`;
         setFormData(newFormData);
     }
 
@@ -76,7 +76,7 @@ function NewFacilityDocumentForm() {
                         id="user"
                         name="user"
                         type="text"
-                        value={formData.user}
+                        value={formData.author}
                         onChange={handleChange}
                     />
                 </FormGroup>
@@ -168,7 +168,7 @@ function NewFacilityDocumentForm() {
                         name="document"
                         type="file"
                         onChange={handleFileChange}
-                        value={formData.fileName}                        
+                                                
                     />
                 </FormGroup>
                 <Button type="submit">Submit New Document</Button>
