@@ -160,12 +160,12 @@ class FacilityAssistApi {
 
         const fileRes = axios.put(url, file)
             .then(res => console.log(res))
-            .then(res => {
+            .then(function(form) {
                 form.id = uuidv4();
                 form.dateTime = new Date().getTime();
                 console.log('form data is ,', form);
-                // const res = this.request('/documents', form, 'post');
-                return res.status(201).json({ "success": 'OK' });
+                const res = this.request('/documents', form, 'post');
+                return res.document;
             })
             .catch(err => console.log(err));
 
