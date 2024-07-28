@@ -33,7 +33,7 @@ class Document {
             (id, author, doc_type, image_components, facility_id, doc_period, doc_year, file_name, date_time)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING id, author, doc_type AS "docType", image_components AS "imageComponents", facility_id AS "facilityId", doc_period AS "docPeriod", doc_year AS "docYear", file_name AS "fileName", date_time AS "dateTime"`,
-            [ id, author, docType, imageComponents, facilityId, docPeriod, docYear, fileName, dateTime ],
+            [ id, author, docType, attachments, facility, period, year, fileName, dateTime ],
         );
 
         const document = result.rows[0];
