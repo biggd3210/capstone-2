@@ -31,7 +31,7 @@ router.get('/:id', ensureLoggedIn, ensureAdmin, async function (req, res, next )
     }
 });
 
-router.post('/', ensureLoggedIn, async function (req, res, next) {
+router.post('/', async function (req, res, next) {
     try {
         const validator = jsonschema.validate(req.body, documentNewSchema);
         if (!validator.valid) {
