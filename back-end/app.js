@@ -12,7 +12,7 @@ const { NotFoundError } = require("./expressError");
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 // const facilitiesRoutes = require('./routes/facilities');
-// const docRoutes = require('./routes/documents');
+const docRoutes = require('./routes/documents');
 
 const app = express();
 
@@ -23,7 +23,7 @@ app.use(cors());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 // app.use('/facilities', facilitiesRoutes);
-// app.use('/documents', docRoutes);
+app.use('/documents', docRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
