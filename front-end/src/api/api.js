@@ -166,7 +166,7 @@ class FacilityAssistApi {
                     form.id = uuidv4();
                     form.dateTime = new Date();
                     console.log('form data to send is ,', form);
-                    const dbRes = this.request('/documents', form, 'post');
+                    const dbRes = this.request('documents/', form, 'post');
                     return dbRes.document;
                 }
             })
