@@ -46,7 +46,9 @@ function NewFacilityDocumentForm() {
         console.log("target type is ", target.files[0].type);
         console.log('target files is ', target.files);
         setFileData(target.files[0]);
-        setFormData(l => ({... formData, ['fileName'] : target.files[0].name}));
+        const newFormData = {... formData};
+        newFormData['fileName'] = target.files[0].name;
+        setFormData(newFormData);
     }
 
     async function handleSubmit (e) {
