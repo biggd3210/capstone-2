@@ -158,15 +158,18 @@ class FacilityAssistApi {
             headers: { 'Content-Type': file.type }
         };
 
-        const fileRes = await axios.put(url, file)
-            .then(res => console.log("res from axios put is ,", res))
-            // .then(async function(form) {
-            //     form.id = uuidv4();
-            //     form.dateTime = new Date().getTime();
-            //     console.log('form data is ,', form);
-            //     const res = await this.request('/documents', form, 'post');
-            //     return res.document;
-            // })
+        
+        const fileRes = axios.put(url, file)
+            .then(res => {
+                console.log("res from axios put is ,", res);
+                if (res.status === 200) {
+                    form.id = uuidv4();
+                    form.dateTime = new Date();
+                    console.log('form data to send is ,', form);
+                    const dbRes = this.request('/documents', form, 'post');
+                    return dbRes.document;
+                }
+            })
             .catch(err => console.log(err));
 
         console.log('fileRes is ,', fileRes);
