@@ -82,7 +82,6 @@ class Document {
             WHERE facility_id=$1`,
             [facility],
         );
-        console.log('docs by facility result is: ', result.rows);
         return result.rows;
     }
 
@@ -102,7 +101,6 @@ class Document {
             ORDER BY due_date`,
             [facilityId],
         );
-        console.log('quick view docs is: ', result.rows);
         return result.rows;
     }
 

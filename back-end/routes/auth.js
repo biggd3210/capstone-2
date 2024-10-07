@@ -23,7 +23,6 @@ router.post("/token", async function (req, res, next) {
     console.log('req.body is ', req.body);
     try {
         const envVars = process.env.TEST_VAR;
-        console.log("test variable is ,", envVars);
         const validator = jsonschema.validate(req.body, userAuthSchema);
         if (!validator.valid) {
             const errs = validator.errors.map(e => e.stack);
@@ -34,7 +33,7 @@ router.post("/token", async function (req, res, next) {
         const token = createToken(user);
         return res.json({ token })
     } catch (err) {
-        console.log("Error on backend");
+        console.error("Error on backend");
         return next(err);
     }
 });

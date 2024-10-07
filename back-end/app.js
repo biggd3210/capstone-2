@@ -1,12 +1,14 @@
 "use strict";
 
-/** Express app for capstone 2: FacilAssist */
+/** Express app for capstone 2: Facility-Assist */
 
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
+//const bodyParser = require("body-parser");
 
 const { NotFoundError } = require("./expressError");
+
+const { authenticateJWT } = require("./middleware/auth");
 
 /** Declare routes here. Each route path will use it's own 'router' in separate file. */
 const authRoutes = require('./routes/auth');
@@ -20,6 +22,7 @@ const app = express();
 // app.use(bodyParser.urlencoded());
 app.use(express.json());
 app.use(cors());
+app.use(authenticateJWT);
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 // app.use('/facilities', facilitiesRoutes);

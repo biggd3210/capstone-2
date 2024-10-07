@@ -122,10 +122,8 @@ class User {
         );
 
         const facilities = facilityRes.rows;
-        console.log('res from db is: ', facilities);
         user.facilities = facilities;
-        facilities.forEach((index) => console.log('index of facility res is: ', index));
-        //facilities.forEach((index) => user.facilities.push(index['facility_name']));
+        
 
         return user;
     }

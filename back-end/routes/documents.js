@@ -33,7 +33,7 @@ router.get('/find-by-id/:id', async function (req, res, next ) {
 });
 
 /** Route to retrieve documents by author */
-router.get('/find-by-user/:username', async function (req, res, next) {
+router.get('/find-by-user/:username', ensureLoggedIn, ensureSameUserOrAdmin, async function (req, res, next) {
     try {
         const documents = await Document.getDocsByAuthor(req.params.username);
         return res.json({ documents })
@@ -43,7 +43,7 @@ router.get('/find-by-user/:username', async function (req, res, next) {
 });
 
 /** Route to retrieve documents by facility */
-router.get('/find-by-facility/:facilityId', async function (req, res, next) {
+router.get('/find-by-facility/:facilityId', ensureLoggedIn, ensureSameUserOrAdmin, async function (req, res, next) {
     try {
         const documents = await Document.getDocsByFacility(req.params.facilityId);
         return res.json({ documents })
@@ -52,7 +52,7 @@ router.get('/find-by-facility/:facilityId', async function (req, res, next) {
     }
 });
 
-router.post('/', async function (req, res, next) {
+router.post('/', ensureLoggedIn, ensureSameUserOrAdmin, async function (req, res, next) {
     try {
         // const validator = jsonschema.validate(req.body, documentNewSchema);
         // if (!validator.valid) {
@@ -67,7 +67,7 @@ router.post('/', async function (req, res, next) {
 });
 
 /** Route to retrieve the dates to populate the quick view tickler. */
-router.get('/tickler-preview/:facilityId', async function (req, res, next) {
+router.get('/tickler-preview/:facilityId', ensureLoggedIn, async function (req, res, next) {
     try {
         const documents = await Document.getDocDueDatesByFacility(req.params.facilityId);
         return res.json({ documents })
@@ -76,7 +76,7 @@ router.get('/tickler-preview/:facilityId', async function (req, res, next) {
     }
 })
 
-router.get('/aws/:fileName', async function (req, res, next) {
+router.get('/aws/:fileName', ensureLoggedIn, async function (req, res, next) {
     const client = new S3Client()
     try {
         return res.json("reached proper endpoint.");
