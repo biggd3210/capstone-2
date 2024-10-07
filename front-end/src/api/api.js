@@ -203,7 +203,6 @@ class FacilityAssistApi {
     static async putToBucket(data) {
         const { file, form } = data;
         const key = file.name;
-        console.log('formdata is ,', form);
         const url = await getSignedUrl(
             S3,
             new PutObjectCommand({
@@ -223,18 +222,22 @@ class FacilityAssistApi {
         
         const fileRes = axios.put(url, file)
             .then(res => {
-                console.log("res from axios put is ,", res);
                 if (res.status === 200) {
                     form.id = uuidv4();
                     form.dateTime = new Date();
-                    console.log('form data to send is ,', form);
-                    const dbRes = this.request('documents/', form, 'post');
-                    return dbRes.document;
+                    
+                    const dbRes = this.request('documents/', form, 'post')
+                    .then((res) => {
+                        console.log('res from db is: ', res)
+                        res.status = 201
+                        return res
+                });
+                return dbRes
                 }
             })
             .catch(err => console.log(err));
 
-        console.log('fileRes is ,', fileRes);
+        return fileRes;
 
     }
 }
