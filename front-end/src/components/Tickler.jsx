@@ -3,36 +3,16 @@ import FacilityAssistApi from "../api/api";
 import { DateTime } from 'luxon';
 
 
-function Tickler({facility}) {
+function Tickler({facilityId, facilityName}) {
     const [ infoLoaded, setInfoLoaded ] = useState(false);
     const [ reportDates, setReportDates ] = useState([]);
-    
-    // useEffect(function loadUserDocs() {
-    //     async function getDocsByAuthor() {
-    //         setUserDocs([])
-    //         if (userDocs.length === 0) {
-    //             try {
-                    
-    //                 const res = await FacilityAssistApi.findDocsByFacility(facilityName);
-    //                 setUserDocs(res);
-    //             } catch (err) {
-    //                 console.error("Facilities loadUserDocs: problem loading docs", err);
-    //                 setUserDocs(null);
-    //             }
-    //         }
-    //         setInfoLoaded(true);
-    //     }
-        
-    //     setInfoLoaded(false);
-    //     getDocsByAuthor();
-    // }, [facilityName]);
     
     useEffect( function loadFacilityReportDates() {
         async function getReportDatesByFacility() {
             setReportDates([])
             if (reportDates.length === 0) {
                 try {
-                    const res = await FacilityAssistApi.fetchReportDates(facility);
+                    const res = await FacilityAssistApi.fetchReportDates(facilityId);
                     setReportDates(res);
                 } catch (err) {
                     console.error("Tickler fetchReportDates: problem loading reportDates", err);
@@ -72,7 +52,7 @@ function Tickler({facility}) {
     return (
         <>
             <div className="row">
-                <h2>Deadlines for {facility}</h2>
+                <h2>Deadlines for {facilityName}</h2>
                 <div className="due-date-records">
                     {dueDates}
                 </div>

@@ -18,10 +18,10 @@ function NavBar({ logout }) {
     const loggedInNav = (
         <>
             <NavItem>
-                <NavLink to='/tickler'>Tickler</NavLink>
+                <NavLink className="btn disabled" to='/tickler'>Tickler</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink to='/' onClick={logout}>Log out</NavLink>
+                <NavLink className="btn btn-primary" to='/' onClick={logout}>Log out</NavLink>
             </NavItem>
         </>
     )
@@ -30,7 +30,7 @@ function NavBar({ logout }) {
     const loggedOutNav = (
             <>
             <NavItem>
-                <NavLink to='/login'>Login</NavLink>
+                <NavLink className="btn btn-primary" to='/login'>Login</NavLink>
             </NavItem>
             </>
         )
@@ -48,7 +48,7 @@ function NavBar({ logout }) {
                 <h1>Facility Assist</h1>            
                 <Nav className="m1-auto" navbar>
                     <NavItem>
-                        <NavLink to='/'>Home</NavLink>
+                        <NavLink className="btn btn-primary" to='/'>Home</NavLink>
                     </NavItem>
                 {currentUser ? loggedInNav : loggedOutNav }
                 </Nav>
