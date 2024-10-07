@@ -8,6 +8,10 @@ import FormInput from "../components/FormInput";
 function LoginPage({ login }) {
     const { currentUser } = useContext(UserContext);
     const navigateTo = useNavigate();
+    if (currentUser) {
+        return <Navigate to='/dashboard' />;
+    }
+
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -41,27 +45,23 @@ function LoginPage({ login }) {
         </div>
     )
 
-    if (currentUser) {
-        navigateTo('/dashboard', { replace: true });
-    }
+    
     
     return (
         <>
-        {currentUser
-        ? loggedInView
-        :   <div className="LoginPage">
-                <h3 className="login-banner">Hi there! Please login to access your material.</h3>
-                <div className="login-card">
-                    <form onSubmit={handleSubmit}>
-                        <FormInput value={formData.username} type="text" name="Username" handleChange={handleChange}/>
-                        <FormInput value={formData.password} type="password" name="Password" handleChange={handleChange}/>
-                        <button
-                            className="btn btn-primary"
-                            onSubmit={handleSubmit}
-                        >Login</button>
-                    </form>
-                </div>
-            </div> }
+        <div className="LoginPage">
+            <h3 className="login-banner">Hi there! Please login to access your material.</h3>
+            <div className="login-card">
+                <form onSubmit={handleSubmit}>
+                    <FormInput value={formData.username} type="text" name="Username" handleChange={handleChange}/>
+                    <FormInput value={formData.password} type="password" name="Password" handleChange={handleChange}/>
+                    <button
+                        className="btn btn-primary"
+                        onSubmit={handleSubmit}
+                    >Login</button>
+                </form>
+            </div>
+        </div>
         </>
     )
 }

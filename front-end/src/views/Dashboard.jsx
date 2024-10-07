@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import UserContext from "../auth/UserContext";
 import "./Dashboard.css";
 import ButtonLink from "../components/ButtonLink";
+import Tickler from "../components/Tickler";
 
 function Dashboard () {
     const { currentUser } = useContext(UserContext);
@@ -19,7 +20,7 @@ function Dashboard () {
                 <ButtonLink path="/team-notes" text="Team Notes" />
             </div>
             <div className="facility-tickler">
-                <p>You currently have no document deadlines. Yay.</p>
+                <Tickler facility="wolfe" />
             </div>
             </div>
         </div>

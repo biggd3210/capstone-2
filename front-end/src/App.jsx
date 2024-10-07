@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import jwt from "jsonwebtoken";
+import { quantum } from 'ldrs';
 
 //Component imports
 import Routes from './views/Routes';
@@ -22,7 +23,10 @@ import './App.css';
 // Key name for storing token in localStorage for "remember me" re-login
 export const TOKEN_STORAGE_ID = "facility-assist-token";
 
+quantum.register();
+
 function App() {
+
   const [infoLoaded, setInfoLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
@@ -80,7 +84,7 @@ function App() {
         <div className='App'>
           <NavBar logout={logout} />
           <main>
-            <Routes login={login} />
+            <Routes login={login} info={infoLoaded} />
           </main>
         </div>
       </UserContext.Provider>

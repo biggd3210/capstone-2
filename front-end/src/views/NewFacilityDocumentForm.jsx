@@ -1,6 +1,6 @@
 /** Imports from NPM Modules */
 import React, { useState, useContext } from "react";
-
+import { useNavigate } from "react-router-dom";
 // API
 import FacilityAssistApi from "../api/api";
 
@@ -30,7 +30,8 @@ function NewFacilityDocumentForm() {
         "period" : "Please Choose Period",
         "year" : "2024",
         "attachments" : "No",
-        "fileName" : ""
+        "fileName" : "",
+        "dueDate" : ""
     });
 
     const [fileData, setFileData] = useState(null);
@@ -59,6 +60,7 @@ function NewFacilityDocumentForm() {
         }
         const res = await FacilityAssistApi.putToBucket(data);
 
+        console.log('res is ', res);
 
     }
 
@@ -169,6 +171,15 @@ function NewFacilityDocumentForm() {
                         type="file"
                         onChange={handleFileChange}
                                                 
+                    />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="dueDate">Next submission due:</Label>
+                    <Input
+                        id="dueDate"
+                        name="dueDate"
+                        type="date"
+                        onChange={handleChange}
                     />
                 </FormGroup>
                 <Button type="submit">Submit New Document</Button>

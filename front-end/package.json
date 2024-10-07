@@ -16,6 +16,8 @@
     "bootstrap": "^5.3.3",
     "buffer": "^6.0.3",
     "jsonwebtoken": "^9.0.2",
+    "ldrs": "^1.0.2",
+    "luxon": "^3.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.22.3",

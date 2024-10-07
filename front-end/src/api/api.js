@@ -73,8 +73,27 @@ class FacilityAssistApi {
     /** Get facilities (filtered by name if not undefined) */
 
     static async getFacilities(name) {
-        let res = await this.request("facilities", { name });
+        let res = await this.request("users/facilities", { name });
         return res.facilities;
+    }
+
+    /** Get documents authored by user */
+
+    static async findDocsByAuthor(username) {
+        let res = await this.request(`documents/find-by-user/${username}`);
+        return res.documents;
+    }
+
+    static async findDocsByFacility(facilityId) {
+        let res = await this.request(`documents/find-by-facility/${facilityId}`);
+        return res.documents;
+    }
+    /** Get all documents */
+
+    static async getAllDocs() {
+        let res = await this.request(`documents`);
+    
+        return res.documents;
     }
 
     /** Get token for login from username, password. */
@@ -82,6 +101,16 @@ class FacilityAssistApi {
     static async login(data) {
         let res = await this.request(`auth/token`, data, "post");
         return res.token;
+    }
+
+    /** Get report data for tickler
+     * Function pulls most recent report date for each document type. Used to calculate days until due to send reminders to facilities.
+     * Queries db based on facility name.
+     */
+
+    static async fetchReportDates(facilityId) {
+        let res = await this.request(`documents/tickler-preview/${facilityId}`);
+        return res.documents;
     }
 
     /** getSignedURL that can be used for GET, PUT, DELETE actions */
@@ -93,6 +122,13 @@ class FacilityAssistApi {
     //         Expires: 60 * 10 /* URL should work for 10 minutes to compensate for large objects. */
     //     }
     // }
+
+    /** Backend getobject from bucket */
+
+    static async getObjectFromBackend(filename) {
+        let res = await this.request(`aws/${filename}`)
+        return res;
+    }
 
     /** Get listobjects using signedUrl  */
 
@@ -130,9 +166,35 @@ class FacilityAssistApi {
         console.log('url is ', url);
         console.log("running or finished running");
 
-        const response = await fetch(url);
-        console.log("reponse is ", response);
-        console.log("here is text", response.text());
+        const response = await fetch(url)
+        .then((resp) => resp.body)
+        .then((body) => {
+            const reader = body.getReader();
+            return new ReadableStream({
+                start(controller) {
+                    return pump();
+                    function pump() {
+                        return reader.read().then(({ done, value }) => {
+                            // When no more data needs to be consumed, close the stream
+                            if (done) {
+                                controller.close();
+                                return;
+                            }
+                            // Enqueue the next data chunk into our target stream
+                            controller.enqueue(value);
+                            return pump();
+                        })
+                    }
+                }
+            })
+        })
+        // Create a new response out of the stream
+        .then((stream) => new Response(stream))
+        // Create an object URL for the response
+        .then((response) => response.blob())
+        // .then((blob) => URL.createObjectURL(blob))
+        .catch((err) => console.error(err))
+        console.log('response is: ', response);
         return response;
     }
 
