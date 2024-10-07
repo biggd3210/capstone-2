@@ -1,0 +1,16 @@
+{
+    "firedrill" : "month",
+    "onsiteInpsectionSelf" : "quarter",
+    "onsiteInspectionAdmin" : "quarter",
+    "fireInspectionReport" : "year",
+    "autoInsuranceCard" : "6 months",
+    "autoInsurancePolicy" : "6 months",
+    "emergencyPlanApproval" : "year",
+    "waterReport" : "year",
+    "carbonMonoxide" : "year",
+    "smokeDetector" : "year",
+    "canineLicense" : "year",
+    "vehicleInspection" : "underYear",
+    "healthAndSafety" : "quarter",
+    "petVaccines" : "3 years" 
+}

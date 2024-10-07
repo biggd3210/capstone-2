@@ -26,12 +26,13 @@ CREATE TABLE documents (
     file_name TEXT NOT NULL,
     date_time TEXT NOT NULL,
     image_components BOOLEAN NOT NULL,
+    due_date TEXT NOT NULL,
     facility_id VARCHAR(25) NOT NULL
         REFERENCES facilities ON DELETE CASCADE
 );
 
 CREATE TABLE user_facilities (
-    username VARCHAR(25)
+    user_id VARCHAR(25)
         REFERENCES users ON DELETE CASCADE,
     facility_id VARCHAR(25)
         REFERENCES facilities ON DELETE CASCADE,

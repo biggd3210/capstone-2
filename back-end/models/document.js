@@ -58,10 +58,72 @@ class Document {
                 doc_year AS "docYear", 
                 file_name AS "fileName", 
                 date_time AS "dateTime"
-            FROM documents`
+            FROM documents
+            ORDER BY facility_id`
         );
 
         return result.rows
+    }
+
+    /** Find all documents by associated facility. */
+    static async getDocsByFacility(facility) {
+        const result = await db.query(
+            `SELECT id,
+                author,
+                doc_type AS "docType",
+                image_components AS "imageComponents",
+                facility_id AS "facilityId",
+                doc_period as "docPeriod",
+                doc_year AS "docYear",
+                file_name AS "fileName",
+                date_time AS "dateTime",
+                due_date AS "dueDate"
+            FROM documents
+            WHERE facility_id=$1`,
+            [facility],
+        );
+        console.log('docs by facility result is: ', result.rows);
+        return result.rows;
+    }
+
+    /** Find documents/due dates for quick view. */
+    static async getDocDueDatesByFacility(facilityId) {
+        const result = await db.query(
+            `SELECT id,
+            author,
+            doc_type AS "docType",
+            facility_id AS "facilityId",
+            doc_period AS "docPeriod",
+            doc_year AS "docYear",
+            date_time AS "dateSubmitted",
+            due_date AS "dueDate"
+            FROM documents
+            WHERE facility_id=$1
+            ORDER BY due_date`,
+            [facilityId],
+        );
+        console.log('quick view docs is: ', result.rows);
+        return result.rows;
+    }
+
+    /** Find all documents created/authored by given username */
+    static async getDocsByAuthor(username) {
+        const result = await db.query(
+            `SELECT id,
+                author,
+                doc_type AS "docType",
+                image_components AS "imageComponents",
+                facility_id AS "facilityId",
+                doc_period as "docPeriod",
+                doc_year AS "docYear",
+                file_name AS "fileName",
+                date_time AS "dateTime"
+            FROM documents
+            WHERE author=$1`,
+            [username],
+        );
+
+        return result.rows;
     }
 
     /** Find document based on filter criteria. 

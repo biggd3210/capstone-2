@@ -9,11 +9,12 @@ const { ensureLoggedIn, ensureAdmin, ensureSameUserOrAdmin } = require("../middl
 const { BadRequestError } = require("../expressError");
 const Document = require("../models/document");
 const { createToken } = require("../helpers/tokens");
+const { S3Client, ListObjectsV2Command } = require('@aws-sdk/client-s3');
 
 const router = express.Router();
 
 /** GET All Documents */
-router.get("/", ensureLoggedIn, ensureAdmin, async function (req, res, next) {
+router.get("/", async function (req, res, next) {
     try {
         const documents = await Document.findAll();
         return res.json({ documents });        
@@ -22,10 +23,30 @@ router.get("/", ensureLoggedIn, ensureAdmin, async function (req, res, next) {
     }
 });
 
-router.get('/:id', ensureLoggedIn, ensureAdmin, async function (req, res, next ) {
+router.get('/find-by-id/:id', async function (req, res, next ) {
     try {
         const document = await Document.find(req.params.id);
         return res.json({ document })
+    } catch (err) {
+        return next(err);
+    }
+});
+
+/** Route to retrieve documents by author */
+router.get('/find-by-user/:username', async function (req, res, next) {
+    try {
+        const documents = await Document.getDocsByAuthor(req.params.username);
+        return res.json({ documents })
+    } catch (err) {
+        return next(err);
+    }
+});
+
+/** Route to retrieve documents by facility */
+router.get('/find-by-facility/:facilityId', async function (req, res, next) {
+    try {
+        const documents = await Document.getDocsByFacility(req.params.facilityId);
+        return res.json({ documents })
     } catch (err) {
         return next(err);
     }
@@ -44,5 +65,26 @@ router.post('/', async function (req, res, next) {
         return next(err);
     }
 });
+
+/** Route to retrieve the dates to populate the quick view tickler. */
+router.get('/tickler-preview/:facilityId', async function (req, res, next) {
+    try {
+        const documents = await Document.getDocDueDatesByFacility(req.params.facilityId);
+        return res.json({ documents })
+    } catch (err) {
+        return next(err);
+    }
+})
+
+router.get('/aws/:fileName', async function (req, res, next) {
+    const client = new S3Client()
+    try {
+        return res.json("reached proper endpoint.");
+    } catch (e) {
+        return next(e);
+    }
+})
+
+
 
 module.exports = router;

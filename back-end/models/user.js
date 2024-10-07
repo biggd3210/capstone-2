@@ -98,12 +98,12 @@ class User {
      */
     static async get(username) {
         const userRes = await db.query(
-            `SELECT username,
-                    first_name AS "firstName",
-                    last_name AS "lastName",
-                    email,
-                    is_Admin AS "isAdmin"
-            FROM users
+            `SELECT u.username,
+                    u.first_name AS "firstName",
+                    u.last_name AS "lastName",
+                    u.email,
+                    u.is_Admin AS "isAdmin"
+            FROM users AS "u"
             WHERE username = $1`,
             [username],
         );
@@ -111,6 +111,21 @@ class User {
         const user = userRes.rows[0];
 
         if (!user) throw new NotFoundError(`No user: ${username}`);
+
+        /** Query facilities by user and push any facilities to user instance */
+        const facilityRes = await db.query(
+            `SELECT f.id, f.facility_name
+            FROM users AS "u" JOIN user_facilities AS "uf" ON (u.username = uf.user_id)
+            JOIN facilities AS "f" ON (uf.facility_id = f.id)
+            WHERE username = $1`,
+            [username],
+        );
+
+        const facilities = facilityRes.rows;
+        console.log('res from db is: ', facilities);
+        user.facilities = facilities;
+        facilities.forEach((index) => console.log('index of facility res is: ', index));
+        //facilities.forEach((index) => user.facilities.push(index['facility_name']));
 
         return user;
     }
