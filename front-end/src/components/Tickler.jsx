@@ -25,7 +25,7 @@ function Tickler({facilityId, facilityName}) {
         setInfoLoaded(false);
         getReportDatesByFacility();
     }, [])
-    reportDates.forEach((record) => console.log(DateTime.fromISO(record.dateSubmitted).toLocaleString()))
+    
     const dueDates = reportDates.map((report) => 
         (
             <div className="row" key={report.id}>

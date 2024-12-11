@@ -43,13 +43,12 @@ function NewFacilityDocumentForm() {
     function handleChange (e) {
         const { name, value } = e.target;
         setFormData(l => ({... formData, [name]: value}))
-        console.log('formData is ', formData);
+        
     }
 
     function handleFileChange (e) {
         const target = e.target;
-        console.log("target type is ", target.files[0].type);
-        console.log('target files is ', target.files);
+        
         setFileData(target.files[0]);
         const newFormData = {... formData};
         newFormData['fileName'] = `${target.files[0].name}`;
@@ -58,13 +57,13 @@ function NewFacilityDocumentForm() {
 
     async function handleSubmit (e) {
         e.preventDefault();
+        setSubmission(true);
         const data = {
             'file' : fileData,
             'form' : formData
         }
         const res = await FacilityAssistApi.putToBucket(data);
 
-        console.log('handle submit res is ', res);
         if (res.status === 201) {
             return navigateTo('/')
         } else {
