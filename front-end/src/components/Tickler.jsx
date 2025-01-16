@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FacilityAssistApi from "../api/api";
-import { DateTime } from 'luxon';
+import { DateTime, Interval } from 'luxon';
+import './Tickler.css';
 
 
 function Tickler({facilityId, facilityName}) {
@@ -26,36 +27,50 @@ function Tickler({facilityId, facilityName}) {
         getReportDatesByFacility();
     }, [])
     
-    const dueDates = reportDates.map((report) => 
-        (
-            <div className="row" key={report.id}>
+    const dueDates = reportDates.map((report) => {
+        // let deadline = Interval.fromDateTimes(DateTime.now(), DateTime.fromFormat(report.dueDate, "dd-MM-YYYY"));
+        // console.log('deadline is ', deadline);
+        
+        return (
+            <div className="row entry-row" key={report.id}>
                 <div className="col-md-3">
-                    <p>Document Type:</p>
                     <p>{report.docType}</p>
                 </div>
                 <div className="col-md-3">
-                    <p>Date Submitted:</p>
                     <p>{DateTime.fromISO(report.dateSubmitted).toLocaleString()}</p>
                 </div>
                 <div className="col-md-3">
-                    <p>Submitted by:</p>
                     <p>{report.author}</p>
                 </div>
                 <div className="col-md-3">
-                    <p>Next Due Date:</p>
                     <p>{report.dueDate}</p>
                 </div>
             </div>
         )
-    )
+})
+
 
     return (
         <>
-            <div className="row">
+            <div className="row deadline-header">
                 <h2>Deadlines for {facilityName}</h2>
-                <div className="due-date-records">
-                    {dueDates}
+            </div>
+            <div className="due-date-records">
+                <div className="row head-row">
+                    <div className="col-md-3 title-cell">
+                        <p className="title">Document Type:</p>
+                    </div>
+                    <div className="col-md-3 title-cell">
+                        <p className="title">Date Submitted:</p>
+                    </div>
+                    <div className="col-md-3 title-cell">
+                        <p className="title">Submitted By:</p>
+                    </div>
+                    <div className="col-md-3 title-cell">
+                        <p className="title">Next Due Date:</p>
+                    </div>
                 </div>
+                {dueDates}
             </div>
         </>
     )

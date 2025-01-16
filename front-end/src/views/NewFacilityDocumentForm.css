@@ -2,3 +2,11 @@
     height: 300px;
     aspect-ratio: 12 9;
 }
+
+.NewFacilityDocumentForm {
+    border: 2px solid grey;
+    border-radius: 15px;
+    padding: 2rem 3rem;
+    width: 50%;
+    margin: 20px auto;
+}

@@ -1,0 +1,29 @@
+.head-row {
+    border: px solid grey;
+    border-radius: 10px;
+    background-color: rgba(169, 169, 169, 0.586);
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.title-cell {
+    align-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+    margin: auto;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.entry-row {
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 0.5rem;
+}
+

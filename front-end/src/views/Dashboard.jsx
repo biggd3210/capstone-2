@@ -19,7 +19,6 @@ function Dashboard () {
                 {/* <ButtonLink path="/user/documents" text="Your Documents" /> */}
                 <ButtonLink path="/documents/new" text="Submit Document" />
                 {/* <ButtonLink path="/team-notes" text="Team Notes" /> */}
-                <a href="https://mylisa.com/depo-provera/">Depo-Provera</a>
             </div>
             <div className="facility-tickler">
                 <Tickler facilityId={currentUser.facilities[0]['id']} facilityName={currentUser.facilities[0]['facility_name']} />
